@@ -25,7 +25,7 @@
 // THIS CLASS CONTAINS FUNTIONS FOR FOOD
 //********************************************
 
-'for'
+//for
  
 class food
 {
@@ -51,6 +51,8 @@ class food
 //*****************************************************
 //  FUNCTION FOR DISPLAYING FOOD MENU
 //*****************************************************
+ 
+ IF
  
      void food::food_menu(void)
      {
