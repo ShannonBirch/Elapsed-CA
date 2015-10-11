@@ -15,15 +15,14 @@
 	*
 	*/
 #include "file.h"
-
+#include "Roladex.h"
+#include <dirent.h>
+#include <iostream>
 void main(){
 
-	file f1("files/example.cpp");
-	file f2("files/testy.cpp");
+	roladex r1;
+	r1.allFileStats();
 
-	f1.outputStats();
-
-	f2.outputStats();
 
 	system("pause");
 }
