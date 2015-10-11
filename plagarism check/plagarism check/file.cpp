@@ -85,11 +85,9 @@ file::file(string fileLoc){
 	}
 
 	void file::outputStats(){
-		cout << "Displaying stats for " << fileLocation << ":\n\n"
-			 << "Number of if statements: " << numIf << endl
-			 << "Number of while statements: " << numWhile << endl
-			 << "Number of for statements: " << numFor << endl
-			 << "Number of switch statements: " << numSwitch << endl
-			 << "Number of case statements: " << numCase << endl;
+		cout << "Displaying stats for " << fileLocation << ":\n"
+			 <<	"#if " << numIf << "  #while " << numWhile
+			 << "  #for " << numFor << "  #switch " << numSwitch
+			 << "  #case " << numCase << "\n\n";
 
 	}
