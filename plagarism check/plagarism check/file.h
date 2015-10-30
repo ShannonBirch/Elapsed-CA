@@ -10,7 +10,10 @@ public:
 	void outputStats();
 
 private:
-	int numIf, numWhile,numFor,numSwitch,numCase;
+	//preston
+	int numInt,numDouble,numChar,numStr,numFunc;
+
+	int numIf, numWhile, numFor, numSwitch, numCase;
 	bool quotes, slComment, multiComment;
 	string fileLocation;
 
