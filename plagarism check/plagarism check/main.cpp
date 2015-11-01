@@ -2,6 +2,7 @@
 	*			
 	*			Look for similar method names.
 	*			Count numbers of variables.
+	*			Format output better
 	*	
 	*Less important:
 	*			Look for similar strings
