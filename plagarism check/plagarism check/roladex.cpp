@@ -30,7 +30,7 @@ roladex::roladex(){
 		}
 		if (strcmp(pent->d_name, ".") && strcmp(pent->d_name, "..")){
 	
-		cout << dirLoc << "/" << pent->d_name << endl;
+		cout << "Found  " << dirLoc << "/" << pent->d_name << endl;
 		files.push_back(file(dirLoc + "/" + pent->d_name));
 		}
 	}

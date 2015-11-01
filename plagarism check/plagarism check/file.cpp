@@ -126,7 +126,6 @@ file::file(string fileLoc){
 		file.close();
 	}
 
-<<<<<<< HEAD
 
 	//preston
 	void file::outputStats() {
@@ -148,14 +147,5 @@ file::file(string fileLoc){
 		cout << endl << "\n";
 
 		
-=======
-	void file::outputStats(){
-		cout << "Displaying stats for " << fileLocation << ":\n\n"
-			 << "Number of if statements: " << numIf << endl
-			 << "Number of while statements: " << numWhile << endl
-			 << "Number of for statements: " << numFor << endl
-			 << "Number of switch statements: " << numSwitch << endl
-			 << "Number of case statements: " << numCase << endl;
->>>>>>> parent of e0055a0... Changed output formatting
 
 	}
