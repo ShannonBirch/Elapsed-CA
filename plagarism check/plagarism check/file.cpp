@@ -30,16 +30,32 @@ file::file(string fileLoc){
 		regex findDouble("\\b(double)(\\b|[^a-zA-Z])");
 		regex findChar("\\b(char)(\\b|[^a-zA-Z])");
 		regex findStr("\\b(string)(\\b|[^a-zA-Z])");
-		regex findFunc("()", regex_constants::grep);
-		regex findQuote("""", regex_constants::grep);
-		regex findSLComment("//", regex_constants::grep); //Single line comment
-		regex multiCommentS("/*", regex_constants::grep); //Start of multi line comments
-		regex multiCommentE("*/", regex_constants::grep);//End of multi line comments
+		regex findFunc("()", regex::grep);
+
+		regex findQuote("\"");
+		regex findSLComment("//"); //Single line comment
+		regex multiCommentS("/\\*"); //Start of multi line comments
+		regex multiCommentE("\\*/");//End of multi line comments
+		
 
 		file.open(fileLoc);
 
 		while (getline(file, content)){
 			istringstream iss(content);
+
+			//preston
+			regex intName("int ([[:w:]]+)");
+			bool found = regex_search(content, m, intName);
+			for (int n = 0; n < m.size(); n=n+2) {
+				cout << "int variable name: " << m[n+1].str() << "\n";
+			}
+
+			//preston
+			regex doubleName("double ([[:w:]]+)");
+			bool found2 = regex_search(content, m, doubleName);
+			for (int n = 0; n < m.size(); n = n + 2) {
+				cout << "double variable name: " << m[n + 1].str() << "\n";
+			}
 
 			while (regex_search(content, m, findSLComment)){
 				//Searches for Single line comments
@@ -112,7 +128,7 @@ file::file(string fileLoc){
 
 
 	//preston
-	void file::outputStats(){
+	void file::outputStats() {
 		const char separator = ' ';
 		const int width = 10;
 		const int width2 = 30;
@@ -129,5 +145,7 @@ file::file(string fileLoc){
 		cout << left << setw(width) << setfill(separator) << numStr;
 		cout << left << setw(width) << setfill(separator) << numFunc;
 		cout << endl << "\n";
+
+		
 
 	}
