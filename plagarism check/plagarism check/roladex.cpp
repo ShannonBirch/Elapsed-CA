@@ -75,6 +75,11 @@ void roladex::outputVars(int fileNum){
 void roladex::compareVars(int file1, int file2){
 	int numSame=0;
 	vector<string> ints1, ints2, doubles1, doubles2;
+	ints1 = files.at(file1).getIntNames(); ints2 = files.at(file2).getIntNames();
+	doubles1 = files.at(file1).getDoubleNames(); doubles2 = files.at(file2).getDoubleNames();
+
+	int numVariables = ints1.size() + ints2.size() + doubles1.size() + doubles2.size();
+
 	for (unsigned int i = 0; i < ints1.size(); i++){
 		if ((ints1.at(i) == "i") || (ints1.at(i) == "j")){
 			//Do nothing
@@ -100,6 +105,8 @@ void roladex::compareVars(int file1, int file2){
 			}
 		}
 	}
+	cout << numSame << " similarly named variables of " << numVariables 
+		<<" total variables.";
 }
 
 

@@ -25,7 +25,7 @@ struct node
 };
 
 node grid[GRID_ROWS][GRID_COLS]; //piece needs to see the grid
-
+int same
 struct piece 
 {
     int stateID = -1;
