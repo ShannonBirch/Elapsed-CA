@@ -3,7 +3,7 @@
 #include <dirent.h>
 #include <iostream>
 #include <vector>
-
+#include <iomanip>
 #include "file.h"
 #include "Roladex.h"
 using namespace std;
@@ -38,8 +38,67 @@ roladex::roladex(){
 
 void roladex::allFileStats(){
 
+	//preston
+	const char separator = ' ';
+	const int width = 9;
+	
+	//preston
+	cout << "\n"
+	 << left << setw(width) << setfill(separator) << "if"
+	 << left << setw(width) << setfill(separator) << "while"
+	 << left << setw(width) << setfill(separator) << "for"
+	 << left << setw(width) << setfill(separator) << "switch"
+	 << left << setw(width) << setfill(separator) << "case"
+	 << left << setw(width) << setfill(separator) << "int"
+	 << left << setw(width) << setfill(separator) << "double"
+	 << left << setw(width) << setfill(separator) << "char"
+	 << left << setw(width) << setfill(separator) << "string"
+	 << endl
+	 << std::string(80, '-')
+	 << endl;
+
 	for (size_t i = 0; i < files.size(); i++){
+		cout << (i + 1) << ".) ";
 		files.at(i).outputStats();
+	}
+}
+
+int roladex::folderSize(){
+	return files.size();
+}
+
+void roladex::outputVars(int fileNum){
+	files.at(fileNum - 1).outputVar();
+
+}
+
+void roladex::compareVars(int file1, int file2){
+	int numSame=0;
+	vector<string> ints1, ints2, doubles1, doubles2;
+	for (unsigned int i = 0; i < ints1.size(); i++){
+		if ((ints1.at(i) == "i") || (ints1.at(i) == "j")){
+			//Do nothing
+		}else{
+			for (unsigned int j = 0; j < ints2.size(); j++){
+				if (ints1.at(i) == ints2.at(j)){
+					numSame++;
+					break;
+				}
+			}
+		}
+	}
+	for (unsigned int i = 0; i < doubles1.size(); i++){
+		if ((doubles1.at(i) == "i") || (doubles1.at(i) == "j")){
+			//Do nothing
+		}
+		else{
+			for (unsigned int j = 0; j < doubles2.size(); j++){
+				if (doubles1.at(i) == doubles2.at(j)){
+					numSame++;
+					break;
+				}
+			}
+		}
 	}
 }
 

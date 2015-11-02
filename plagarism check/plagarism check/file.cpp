@@ -1,7 +1,9 @@
 #include<iostream>
+#include<iomanip>
 #include<fstream>
 #include<sstream>
 #include<string>
+#include<vector>
 #include <regex>
 #include "file.h"
 using namespace std;
@@ -11,6 +13,9 @@ using namespace std;
 
 file::file(string fileLoc){
 		numIf = 0, numWhile = 0, numFor = 0, numSwitch = 0, numCase = 0;
+		//preston
+		numInt = 0, numDouble = 0, numChar = 0, numStr = 0;
+		//Preston 
 		fileLocation = fileLoc;
 		quotes=false, slComment=false, multiComment=false;
 		ifstream file;
@@ -21,6 +26,14 @@ file::file(string fileLoc){
 		regex findFor("\\b(for)(\\b|[^a-zA-Z])"); 
 		regex findSwitch("\\b(switch)(\\b|[^a-zA-Z])");
 		regex findCase("\\b(case)(\\b|[^a-zA-Z])");
+		//
+		regex findInt("\\b(int)(\\b|[^a-zA-Z])");
+		regex findDouble("\\b(double)(\\b|[^a-zA-Z])");
+		regex findChar("\\b(char)(\\b|[^a-zA-Z])");
+		regex findStr("\\b(string)(\\b|[^a-zA-Z])");
+		//
+
+
 		regex findQuote("\"");
 		regex findSLComment("//"); //Single line comment
 		regex multiCommentS("/\\*"); //Start of multi line comments
@@ -56,6 +69,24 @@ file::file(string fileLoc){
 				}
 
 				if (quotes == false){//Ignores things in quotes
+					//Recording variable names
+					//preston
+					regex intName("int ([[:w:]]+)");
+					while (regex_search(content, m, intName)){
+						for (auto x : m);
+						ints.push_back(m._At(1).str());
+						break;
+					}
+
+					regex doubleName("double ([[:w:]]+)");
+					while (regex_search(content, m, doubleName)){
+						for (auto x : m);
+						doubles.push_back(m._At(1).str());
+						break;
+					}
+
+					//End of Recording variable names
+					//Counting things
 					while (regex_search(content, m, findIf)){
 						for (auto x : m);
 						content = m.suffix().str();
@@ -71,7 +102,20 @@ file::file(string fileLoc){
 						for (auto x : m); content = m.suffix().str(); numSwitch++;
 					}
 					while (regex_search(content, m, findCase)){
-						for (auto x : m); content = m.suffix().str(); numCase++;
+						for (auto x : m); content = m.suffix().str();numCase++;
+					}
+					//preston
+					while (regex_search(content, m, findInt)) {
+						for (auto x : m); content = m.suffix().str(); numInt++;
+					}
+					while (regex_search(content, m, findDouble)) {
+						for (auto x : m); content = m.suffix().str(); numDouble++;
+					}
+					while (regex_search(content, m, findChar)) {
+						for (auto x : m); content = m.suffix().str(); numChar++;
+					}
+					while (regex_search(content, m, findStr)) {
+						for (auto x : m); content = m.suffix().str(); numStr++;
 					}
 
 				} //The end of the quotes check
@@ -85,9 +129,40 @@ file::file(string fileLoc){
 	}
 
 	void file::outputStats(){
-		cout << "Displaying stats for " << fileLocation << ":\n"
-			 <<	"#if " << numIf << "  #while " << numWhile
-			 << "  #for " << numFor << "  #switch " << numSwitch
-			 << "  #case " << numCase << "\n\n";
+		const char separator = ' ';
+		const int width = 9;
+		
 
+		cout << fileLocation << ":" << endl
+		 << left << setw(width) << setfill(separator) << numIf
+		 << left << setw(width) << setfill(separator) << numWhile
+		 << left << setw(width) << setfill(separator) << numFor
+		 << left << setw(width) << setfill(separator) << numSwitch
+		 << left << setw(width) << setfill(separator) << numCase
+		 << left << setw(width) << setfill(separator) << numInt
+		 << left << setw(width) << setfill(separator) << numDouble
+		 << left << setw(width) << setfill(separator) << numChar
+		 << left << setw(width) << setfill(separator) << numStr
+		 << endl;
 	}
+
+	void file::outputVar(){
+		cout << "Ints:\n";
+		for (int i = 0; i < ints.size(); i++){
+			cout << ints.at(i) << endl;
+		}
+		cout << "Doubles:\n";
+		for (int i = 0; i < doubles.size(); i++){
+			cout << doubles.at(i) << endl;
+		}
+	}
+
+	vector<string> file::getIntNames(){
+		return ints;
+	}
+	vector<string> file::getDoubleNames(){
+		return doubles;
+	}
+
+
+	

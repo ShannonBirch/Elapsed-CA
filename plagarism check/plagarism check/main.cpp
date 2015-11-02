@@ -16,11 +16,11 @@
 	*/
 #include "file.h"
 #include "Roladex.h"
+#include "menu.h"
 
 void main(){
 
-	roladex r1;
-	r1.allFileStats();
+	menu menu1;
 
 
 	system("pause");
